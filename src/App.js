@@ -4,7 +4,7 @@ import React from "react";
 function App() {
   return (
     <div className="App">
-
+      <h1>Welcome sumit in our app</h1>
     </div>
   );
 }
