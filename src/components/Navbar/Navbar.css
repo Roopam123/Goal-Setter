@@ -1,0 +1,27 @@
+nav{
+    display: flex;
+    width: 100vw;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.nav-left>a{
+    text-decoration: none;
+}
+.nav-left>a>span{
+    font-size: 25px;
+    font-style: italic;
+    font-weight: 600;
+    text-decoration: none;
+}
+.nav-left>a>span>span{
+    font-weight: 600px;
+    color: rgb(230, 230, 148);
+}
+@media screen and (min-width:320px) and (max-width:480px) {
+    nav{
+        width: 100vw;
+        overflow-x: hidden;
+    }
+}
