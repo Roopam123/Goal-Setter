@@ -8,6 +8,7 @@
     flex-wrap: wrap;
     border-radius: 10px;
     background-color: rgb(232, 220, 220);
+    overflow-x: hidden;
 }
 .signup-right{
     width: 50%;
