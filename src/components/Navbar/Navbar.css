@@ -8,16 +8,21 @@ nav{
 }
 .nav-left>a{
     text-decoration: none;
+    font-family: "Dancing Script", cursive;
+    font-weight: 800;
 }
 .nav-left>a>span{
-    font-size: 25px;
-    font-style: italic;
-    font-weight: 600;
+    font-size: 30px;
+    font-weight: 800;
     text-decoration: none;
+    color: "#ODF7A1";
+    font-family: "Dancing Script", cursive;
+    color: #454655;
 }
 .nav-left>a>span>span{
     font-weight: 600px;
-    color: rgb(230, 230, 148);
+    color: "#ODF7A1";
+    font-family: cursive;
 }
 @media screen and (min-width:320px) and (max-width:480px) {
     nav{

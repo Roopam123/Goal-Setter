@@ -35,20 +35,20 @@ const Signup = () => {
           <div className="form-item">
             <div className="form-content">
               <span>Username</span>
-              <input type="text" placeholder='First Name' />
+              <input type="text" placeholder='Enter your username' />
             </div>
             <div className="form-content">
               <span>Password</span>
-              <input type="password" placeholder='First Name' />
+              <input type="password" placeholder='Enter your password' />
             </div>
           </div>
           <div className="form-item">
             <div className="form-content">
               <span>Address</span>
-              <input type="text" placeholder='First Name' className='address'/>
+              <input type="text" placeholder='Fill your address' className='address'/>
             </div>
           </div>
-          <span className='button'><Button title="Signup"/></span>
+          <span className='button'><Button title="Sign Up"/></span>
         </form>
       </div>
     </div>

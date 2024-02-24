@@ -1,14 +1,15 @@
 .btn>button{
     font-size: 20px;
-    background-color: black;
+    background-color: #0D47A1;
     color: white;
     font-weight: 600;
     cursor: pointer;
     border-radius: 26px;
     padding: 10px 30px;
+    transition: 0.3s ease-in-out all;
+    border: none;
+    outline: none;
 }
 .btn>button:hover{
-    background-color: white;
-    transform: scale(.9);
-    color: black;
+    background-color: #4667c6;
 }
