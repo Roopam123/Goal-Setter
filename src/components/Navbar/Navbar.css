@@ -24,6 +24,10 @@ nav{
     color: "#ODF7A1";
     font-family: cursive;
 }
+.nav-right{
+    display: flex;
+    gap: 20px;
+}
 @media screen and (min-width:320px) and (max-width:480px) {
     nav{
         width: 100vw;

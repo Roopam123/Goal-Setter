@@ -2,6 +2,8 @@ import React from 'react';
 import "./SignUp.css";
 import Button from '../../components/Button/Button';
 import img from '../../Assets/goal.png'
+
+
 const Signup = () => {
   return (
     <div className='signup'>
