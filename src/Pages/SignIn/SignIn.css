@@ -88,6 +88,6 @@ textarea:focus, input:focus {
 
 @media screen and (min-width:320px) and (max-width:480px) {
     #form-input>input {
-        width: 259px;
+        width: 51vw;
     }
 }
