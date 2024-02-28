@@ -61,7 +61,7 @@ form{
     padding-left: 11px;
     font-size: 15px;
     border-radius: 0px 12px 0px 12px;
-    border: 1px solid #a9aabc;
+    border: 1px solid var(--gray-extra-light);
 }
 #form-input>input{
     width: 300px;

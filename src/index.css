@@ -1,10 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+
+:root {
+  --primary-color: #0d47a1;
+  --secondary-color: #ffc107;
+  --text-color: #454655;
+  --background-color: #f8f9fa;
+  --gray-extra-light:#a9aabc;
+}
+
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: "Roboto", sans-serif;
     box-sizing: border-box;
+}
+img{
+  width: 100%;
 }
 .roboto-thin {
     font-family: "Roboto", sans-serif;
