@@ -3,8 +3,9 @@ import "./SignUp.css";
 import Button from '../../components/Button/Button';
 import img from '../../Assets/goal.png';
 import { register } from '../../api';
-// import 'react-toastify/dist/ReactToastify.css';
-
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import {useNavigate} from 'react-router-dom';
 
 const Signup = () => {
   const [firstName, setFirstName] = useState("");
@@ -15,7 +16,8 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [conformPassword, setConformPassword] = useState("");
   const [address, setAddress] = useState("");
-  const [error,setError] = useState("")
+  const [disableBtn,setDisableBtn] = useState(false)
+
   const data = {
     fName: firstName,
     lName: lastName,
@@ -26,12 +28,19 @@ const Signup = () => {
     cpassword: conformPassword,
     address: address
   }
+
+  const navigate = useNavigate();
   const handelOnSubmit = async (e) => {
     e.preventDefault()
+
+    // If password and confirm password is not same
     if (password != conformPassword) {
-      setError("Password and Confirm Password is not same!")
-      return;
+      return toast.error("Password mismatch, please ensure they are identical.",{
+          position:"top-center",
+        }
+      );
     }
+    // if all field is not filled
     if (firstName==="" ||
         lastName==="" ||
         password ===""|| 
@@ -41,15 +50,32 @@ const Signup = () => {
         qualification===""||
         address===""
         ) {
-          setError("Please fill all fields");
-          return;
-    }
+          return toast.error("Ensure all fields are completed, please.",{
+            position: "top-center"}
+        );
+      }
+      // fetch data
     try {
-      await register(data);
-      // toast.success("Registration Successful");
+      const responce = await register(data);
+      if (responce) {
+        toast.success("Signup successful! Please proceed to login and start your journey with us.",{
+          position:"top-center"
+        })
+        navigate("/")
+        setDisableBtn(true)
+        setFirstName("");
+        setLastName("");
+        setMobileNo("");
+        setQualification("");
+        setUsername("");
+        setPassword("");
+        setConformPassword("");
+        setAddress("")
+      }
     } catch (err) {
-      console.log("SignUp Error");
-      // toast.error("Error occurred during registration");
+      toast.error("Error occurred during registration",{
+        position:"top-center"
+      });
     }
   }
   return (
@@ -63,7 +89,7 @@ const Signup = () => {
         <form>
           <div className="form-item">
             <div className="form-content">
-              <span>First Name*</span>
+              <span >First Name*</span>
               <input type="text" 
                      placeholder='Enter your first name' 
                      value={firstName}
@@ -81,14 +107,14 @@ const Signup = () => {
             <div className="form-content">
               <span>Mobile No.*</span>
               <input type="text" 
-                     placeholder='Enter your Mobile No.' 
+                     placeholder='Mobile No.' 
                      value={mobileNo}
                      onChange={(e) => setMobileNo(e.target.value)} />
             </div>
             <div className="form-content">
               <span>Qualification*</span>
               <input type="text" 
-                     placeholder='First Name'
+                     placeholder='Qualification'
                      value={qualification} 
                      onChange={(e) => setQualification(e.target.value)} />
             </div>
@@ -97,7 +123,7 @@ const Signup = () => {
             <div className="form-content">
               <span>Username*</span>
               <input type="text"
-                     placeholder='Enter your username'
+                     placeholder='Username'
                      value={username}
                      onChange={(e) => setUsername(e.target.value)}
                      />
@@ -105,7 +131,7 @@ const Signup = () => {
             <div className="form-content">
               <span>Password*</span>
               <input type="password" 
-                     placeholder='Enter your password' 
+                     placeholder='Password' 
                      value={password}
                      onChange={(e) => setPassword(e.target.value)} />
             </div>
@@ -122,12 +148,12 @@ const Signup = () => {
             <div className="form-content">
               <span>Address</span>
               <input type="text" 
-                     placeholder='Enter your Address' 
+                     placeholder='Address' 
                      value={address}
                      onChange={(e) => setAddress(e.target.value)} />
             </div>
           </div>
-          <span onClick={handelOnSubmit} className='button'><Button title="Sign Up"/></span>
+          <button disabled={disableBtn?true:false} onClick={handelOnSubmit}className='button'><Button title="Sign Up"/></button>
         </form>
       </div>
     </div>
