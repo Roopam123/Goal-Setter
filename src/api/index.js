@@ -153,3 +153,22 @@ export const register = (body)=>{
         body,
     });
 }
+
+export const login = (body)=>{
+    return customFetch(API_URLS.login(), {
+        method: "POST",
+        body,
+    })
+}
+
+export const me = ()=>{
+    return customFetch(API_URLS.me(), {
+        method: "GET"
+    })
+}
+
+export const logout = ()=>{
+    return customFetch(API_URLS.logout(), {
+        method: "DELETE"
+    })
+}
