@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "./SignUp.css";
 import Button from '../../components/Button/Button';
 import img from '../../Assets/goal.png';
-import { register } from '../../api';
-// import 'react-toastify/dist/ReactToastify.css';
+import { register, checkUsername } from '../../api';
+import {toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 
 const Signup = () => {
@@ -13,45 +14,93 @@ const Signup = () => {
   const [username, setUsername] = useState("");
   const [qualification, setQualification] = useState("");
   const [password, setPassword] = useState("");
-  const [conformPassword, setConformPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [address, setAddress] = useState("");
-  const [error,setError] = useState("")
-  const data = {
-    fName: firstName,
-    lName: lastName,
-    mobile: mobileNo,
-    username: username,
-    qualification: qualification,
-    password: password,
-    cpassword: conformPassword,
-    address: address
-  }
+  const [usernameExists, setUsernameExists] = useState(false);
+  const navigate = useNavigate();
+  
+  useEffect(()=>{
+    handleUsernameChange()
+  }, [username]);
+
+
+
+
   const handelOnSubmit = async (e) => {
     e.preventDefault()
-    if (password != conformPassword) {
-      setError("Password and Confirm Password is not same!")
+
+        // check for all required feilds
+        if(firstName === "" || lastName === "" || mobileNo === "" || username === "" || qualification === "" || password == "" || confirmPassword == ""){
+          toast.error("Please fill all required feilds!");
+          return;
+        }
+
+    // check for password and cpassword value
+    if (password !== confirmPassword) {
+      toast.error("password and cpassword are not same!")
       return;
     }
-    if (firstName==="" ||
-        lastName==="" ||
-        password ===""|| 
-        conformPassword===""||
-        mobileNo===""||
-        username===""||
-        qualification===""||
-        address===""
-        ) {
-          setError("Please fill all fields");
-          return;
+
+    const data = {
+      fName: firstName,
+      lName: lastName,
+      mobile: mobileNo,
+      username: username,
+      qualification: qualification,
+      password: password,
+      cpassword: confirmPassword,
+      address: address
     }
+
+
     try {
-      await register(data);
-      // toast.success("Registration Successful");
+       const response = await register(data);
+       if(response.success === true){
+          toast.success(`Hey ${response.data.fName}! You are registered Successfully!`);
+
+          setFirstName("");
+          setLastName("");
+          setMobileNo("");
+          setUsername("");
+          setQualification("");
+          setPassword("");
+          setConfirmPassword("");
+
+          navigate("/");
+          return;
+         
+
+       }else{
+         toast.warn(response.message);
+         return;
+       }
     } catch (err) {
       console.log("SignUp Error");
-      // toast.error("Error occurred during registration");
+      toast.error("Error occurred during registration");
+      setFirstName("");
+      setLastName("");
+      setMobileNo("");
+      setUsername("");
+      setQualification("");
+      setPassword("");
+      setConfirmPassword("");
+      return;
     }
   }
+
+  const handleUsernameChange = async(e)=>{
+      try{
+         // check username available
+         let isAvailale = await checkUsername(username);
+         isAvailale = isAvailale.data.exists;
+
+         setUsernameExists(isAvailale);
+
+      }catch(err){
+        console.log(err);
+      }
+  }
+
   return (
     <div className='signup'>
       {/* Left */}
@@ -74,7 +123,7 @@ const Signup = () => {
               <input type="text" 
                      placeholder='Enter your last name' 
                      value={lastName}
-                     onChange={(e) => setLastName(e.target.value)} />
+                     onChange={(e)=> setLastName(e.target.value)} />
             </div>
           </div>
           <div className="form-item">
@@ -99,8 +148,9 @@ const Signup = () => {
               <input type="text"
                      placeholder='Enter your username'
                      value={username}
-                     onChange={(e) => setUsername(e.target.value)}
+                     onChange={(e)=> setUsername(e.target.value)}
                      />
+                {usernameExists && <small className='small_error'>username taken</small>}
             </div>
             <div className="form-content">
               <span>Password*</span>
@@ -115,8 +165,8 @@ const Signup = () => {
               <span>Confirm Password*</span>
               <input type="password"
                      placeholder='Confirm Password'
-                     value={conformPassword}
-                     onChange={(e) => setConformPassword(e.target.value)}
+                     value={confirmPassword}
+                     onChange={(e) => setConfirmPassword(e.target.value)}
                      />
             </div>
             <div className="form-content">

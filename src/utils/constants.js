@@ -6,6 +6,6 @@ export const API_URLS = {
     logout: ()=> `${API_ROOT}api/v1/student/logout`,
     checkTokenValidity: ()=> `${API_ROOT}api/v1/student/checkTokenValidity`,
     getAccessTokenUrl: ()=> `${API_ROOT}api/getAccessToken`,
-    checkUsername: ()=> `${API_ROOT}api/v1/student/me`,
+    checkUsername: (username)=> `${API_ROOT}api/v1/student/checkUsername?username=${username}`,
 }
 export const {TOKEN_KEY,REFRESH_KEY} = process.env;
