@@ -21,7 +21,7 @@ const checkTokenValidity = async(token)=>{
         const response = await fetch(apiUrl, config);
         const data = await response.json();
 
-        if(data.isValid != true){
+        if(data.isValid !== true){
             return false;
         }
 
@@ -82,7 +82,7 @@ const customFetch = async(url, {body, ...customConfig})=>{
 
     if(token){
         let isValid = await checkTokenValidity(token);
-        if(isValid){
+        if(isValid === true){
             headers.Authorization = `Bearer ${token}`;
         }else{
            // get new tokens
@@ -171,4 +171,10 @@ export const logout = ()=>{
     return customFetch(API_URLS.logout(), {
         method: "DELETE"
     })
+}
+
+export const checkUsername = (username)=>{
+    return customFetch(API_URLS.checkUsername(username), {
+        method: "GET"
+    });
 }

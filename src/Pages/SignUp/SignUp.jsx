@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "./SignUp.css";
 import Button from '../../components/Button/Button';
 import img from '../../Assets/goal.png';
-import { register } from '../../api';
+import { register, checkUsername } from '../../api';
 // import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -13,9 +13,15 @@ const Signup = () => {
   const [username, setUsername] = useState("");
   const [qualification, setQualification] = useState("");
   const [password, setPassword] = useState("");
-  const [conformPassword, setConformPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [address, setAddress] = useState("");
-  const [error,setError] = useState("")
+  const [usernameExists, setUsernameExists] = useState(false);
+  
+  useEffect(()=>{
+    handleUsernameChange()
+  }, [username])
+
+
   const data = {
     fName: firstName,
     lName: lastName,
@@ -23,25 +29,25 @@ const Signup = () => {
     username: username,
     qualification: qualification,
     password: password,
-    cpassword: conformPassword,
+    cpassword: confirmPassword,
     address: address
   }
   const handelOnSubmit = async (e) => {
     e.preventDefault()
-    if (password != conformPassword) {
-      setError("Password and Confirm Password is not same!")
+    if (password !== confirmPassword) {
+      // setError("Password and Confirm Password is not same!")
       return;
     }
     if (firstName==="" ||
         lastName==="" ||
         password ===""|| 
-        conformPassword===""||
+        confirmPassword===""||
         mobileNo===""||
         username===""||
         qualification===""||
         address===""
         ) {
-          setError("Please fill all fields");
+          // setError("Please fill all fields");
           return;
     }
     try {
@@ -51,6 +57,20 @@ const Signup = () => {
       console.log("SignUp Error");
       // toast.error("Error occurred during registration");
     }
+  }
+
+  const handleUsernameChange = async(e)=>{
+      try{
+         // check username available
+         let isAvailale = await checkUsername(username);
+         isAvailale = isAvailale.data.exists;
+
+         setUsernameExists(isAvailale);
+
+      }catch(err){
+        console.log(err);
+        // show error by toust
+      }
   }
   return (
     <div className='signup'>
@@ -74,7 +94,7 @@ const Signup = () => {
               <input type="text" 
                      placeholder='Enter your last name' 
                      value={lastName}
-                     onChange={(e) => setLastName(e.target.value)} />
+                     onChange={handelOnSubmit} />
             </div>
           </div>
           <div className="form-item">
@@ -99,8 +119,9 @@ const Signup = () => {
               <input type="text"
                      placeholder='Enter your username'
                      value={username}
-                     onChange={(e) => setUsername(e.target.value)}
+                     onChange={(e)=> setUsername(e.target.value)}
                      />
+                {usernameExists && <small className='small_error'>username taken</small>}
             </div>
             <div className="form-content">
               <span>Password*</span>
@@ -115,8 +136,8 @@ const Signup = () => {
               <span>Confirm Password*</span>
               <input type="password"
                      placeholder='Confirm Password'
-                     value={conformPassword}
-                     onChange={(e) => setConformPassword(e.target.value)}
+                     value={confirmPassword}
+                     onChange={(e) => setConfirmPassword(e.target.value)}
                      />
             </div>
             <div className="form-content">

@@ -11,6 +11,13 @@
     /* background-color: #BFD2FF; */
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
+
+.small_error{
+    color: rgb(236, 18, 18);
+    font-size: 12px;
+    position: relative;
+    top: -2px;
+}
 .signup-right{
     width: 50%;
     display: flex;
