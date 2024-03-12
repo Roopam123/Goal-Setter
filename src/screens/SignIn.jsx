@@ -32,7 +32,6 @@ const SignIn = () => {
         navigate("/");
         setUsername("");
         setPassword("");
-        console.log(auth);
         return;
         
       }else{

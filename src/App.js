@@ -6,9 +6,16 @@ import Footer from "./components/Footer";
 import SignIn from "./screens/SignIn";
 import "./index.css";
 import Home from '../src/screens/Home';
+import { useAuth } from "./hooks";
+import Loader from "./components/Loader";
 
 function App() {
+  const auth = useAuth();
+  let loading = auth.loading;
+
   return (
+   <>
+     {loading? <Loader/> : 
     <BrowserRouter>
       <Navbar />
       <Routes>
@@ -18,6 +25,9 @@ function App() {
       </Routes>
       <Footer />
     </BrowserRouter>
+  }
+   </>
+
   );
 }
 

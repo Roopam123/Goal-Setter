@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from './Button';
 import styles from  '../styles/navbar.module.css';
@@ -6,6 +6,13 @@ import { useAuth } from '../hooks';
 
 const Navbar = () => {
   const auth = useAuth();
+  const [btnLoading, setBtnLoading] = useState(false);
+
+  const handleLogout = async()=>{
+      setBtnLoading(true);
+      await auth.logout();
+      setBtnLoading(false);
+  }
 
   return (
     <nav>
@@ -14,7 +21,19 @@ const Navbar = () => {
       </div>
       <div className={styles.nav_right}>
       {auth.user? 
-       <p>Hey {auth.user.fName}</p>
+      <>
+      <p className={styles.userInfo}>Hey {auth.user.fName}</p>
+
+      {btnLoading? 
+        <button disabled className={styles.signOutBtn}>
+        Signing Out...
+      </button>: 
+
+      <button onClick={handleLogout} className={styles.signOutBtn}>
+        Sign Out
+      </button>
+      }
+      </>
       :
      <>
      <Link to="/signup">

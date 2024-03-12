@@ -34,6 +34,7 @@ const checkTokenValidity = async(token)=>{
 const getAccessToken = async(refress_token)=>{
     let apiUrl = API_URLS.getAccessTokenUrl();
 
+
     const headers = {
         'content-type': 'application/json'
     }
@@ -152,11 +153,48 @@ export const register = (body)=>{
     });
 }
 
-export const login = (body)=>{
-    return customFetch(API_URLS.login(), {
+export const login = async(body)=>{
+    const uri = API_URLS.login();
+    const headers = {
+        'content-type': 'application/json'
+    }
+
+    body = JSON.stringify(body);
+
+    const config = {
         method: "POST",
+        headers: {
+            ...headers
+        },
         body,
-    })
+    }
+
+    try{
+        const response = await fetch(uri, config);
+        const data = await response.json();
+
+        if(data.success){
+            // console.log(data);
+            return {
+                data: data.data,
+                success: true,
+                message: data.message
+            };
+        }
+
+          // throw new Error(data.message);
+          return {
+            message:data.message,
+            success: false
+        }
+
+    }catch(err){
+        return {
+            message: err.message,
+            success: false
+        };
+        
+    }
 }
 
 export const me = ()=>{
