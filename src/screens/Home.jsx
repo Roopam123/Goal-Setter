@@ -1,5 +1,5 @@
 import React from 'react';
-import img from '../assets/goalsetter.png';
+import img from '../Assets/goalsetter.png';
 import styles from  '../styles/home.module.css'
 
 const NewHome = () => {
