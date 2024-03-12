@@ -9,7 +9,6 @@ const checkTokenValidity = async(token)=>{
         'content-type': 'application/json',
         'Authorization': `Bearer ${token}`
     }
-
     const config = {
         method: "GET",
         headers: {
@@ -70,7 +69,6 @@ const customFetch = async(url, {body, ...customConfig})=>{
     // const token = window.localStorage.getItem(LOCALSTORAGE_TOKEN_KEY);
     const token = window.localStorage.getItem(TOKEN_KEY);
     const refresh_token = window.localStorage.getItem(REFRESH_KEY);
-
 
 
  
@@ -164,7 +162,7 @@ export const login = (body)=>{
 export const me = ()=>{
     return customFetch(API_URLS.me(), {
         method: "GET"
-    })
+    });
 }
 
 export const logout = ()=>{

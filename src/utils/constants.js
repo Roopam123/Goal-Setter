@@ -8,4 +8,3 @@ export const API_URLS = {
     getAccessTokenUrl: ()=> `${API_ROOT}api/getAccessToken`,
     checkUsername: (username)=> `${API_ROOT}api/v1/student/checkUsername?username=${username}`,
 }
-export const {TOKEN_KEY,REFRESH_KEY} = process.env;

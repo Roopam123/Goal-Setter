@@ -1,7 +1,7 @@
-.signup{
+.signin{
     display: flex;
     flex-direction: row;
-    /* margin: auto; */
+    margin: auto;
     margin-top: 3rem;
     width: 70%;
     align-items: center;
@@ -12,7 +12,7 @@
     /* background-color: #BFD2FF; */
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
-.signup-right{
+.signin_right{
     width: 50%;
     display: flex;
     flex-direction: column;
@@ -22,16 +22,16 @@
     padding-top: 2rem;
     padding-bottom: 1.5rem;
 }
-.signup-right>span{
+.signin_right>span{
     font-size: 30px;
     color: black;
     font-weight: 600;
     text-decoration: underline;
 }
-.signup-right-icon>img{
+.signin_right_icon>img{
     transform: scale(.2);
 }
-.form-content{
+.form_content{
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -43,30 +43,30 @@ form{
     flex-direction: column;
     gap: 1rem;
 }
-.signup-right-icon{
+.signin_right_icon{
     display: flex;
     flex-direction: row;
     height: 30px;
 }
-.signup-right-icon>span>svg{
+.signin_right_icon>span>svg{
     height: 20px;
 }
-.form-content>span{
+.form_content>span{
     font-size: 17px;
     font-weight: 600;
     color: #454655;
 }
-.form-content>input {
+.form_content>input {
     height: 41px;
     padding-left: 11px;
     font-size: 15px;
     border-radius: 0px 12px 0px 12px;
     border: 1px solid var(--gray-extra-light);
 }
-#form-input>input{
+#form_input>input{
     width: 300px;
 }
-#form-input{
+#form_input{
     margin-bottom: 25px;
 }
 .address{
@@ -81,13 +81,41 @@ textarea:focus, input:focus{
 textarea:focus, input:focus {
     font-size: 15px;
 }
-.singup-left>img{
+.singin_left>img{
     width: 300px;
+}
+
+.btn{
+    font-size: 18px;
+    background-color: #0D47A1;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 20px;
+    padding: 7px 25px;
+    transition: 0.3s ease-in-out all;
+    border: none;
+    outline: none;
+}
+.btn:hover{
+    background-color: #4667c6;
+}
+.btn_disabled{
+    background-color: #4667c6;
+    font-size: 18px;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 20px;
+    padding: 7px 25px;
+    transition: 0.3s ease-in-out all;
+    border: none;
+    outline: none;
 }
 /* for mobile screen */
 
 @media screen and (min-width:320px) and (max-width:480px) {
-    #form-input>input {
+    #form_input>input {
         width: 51vw;
     }
 }

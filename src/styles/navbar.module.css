@@ -6,12 +6,12 @@ nav{
     justify-content: space-between;
     align-items: center;
 }
-.nav-left>a{
+.nav_left>a{
     text-decoration: none;
     font-family: "Dancing Script", cursive;
     font-weight: 800;
 }
-.nav-left>a>span{
+.nav_left>a>span{
     font-size: 30px;
     font-weight: 800;
     text-decoration: none;
@@ -19,12 +19,12 @@ nav{
     font-family: "Dancing Script", cursive;
     color: #454655;
 }
-.nav-left>a>span>span{
+.nav_left>a>span>span{
     font-weight: 600px;
     color: "#ODF7A1";
     font-family: cursive;
 }
-.nav-right{
+.nav_right{
     display: flex;
     gap: 20px;
 }

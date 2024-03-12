@@ -1,11 +1,11 @@
-.new-home{
+.new_home{
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 1rem;
     flex-direction: column;
 }
-.new-home-img{
+.new_home_img{
     width: 40%;
     min-width: 360px;
 }
