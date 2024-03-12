@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from "../styles/signup.module.css";
-import img from '../assets/goal.png';
+import img from '../Assets/goal.png';
 import { register, checkUsername } from '../api';
 import {toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
@@ -20,7 +20,7 @@ const Signup = () => {
   const navigate = useNavigate();
   
   useEffect(()=>{
-    handleUsernameChange()
+    handleUsernameChange();
   }, [username]);
 
 
@@ -30,7 +30,7 @@ const Signup = () => {
     e.preventDefault();
 
         // check for all required feilds
-        if(firstName === "" || lastName === "" || mobileNo === "" || username === "" || qualification === "" || password == "" || confirmPassword == ""){
+        if(firstName === "" || lastName === "" || mobileNo === "" || username === "" || qualification === "" || password === "" || confirmPassword === ""){
           toast.error("Please fill all required feilds!");
           return;
         }

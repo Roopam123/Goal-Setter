@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import img from '../assets/signin.png';
+import img from '../Assets/signin.png';
 import styles from "../styles/signin.module.css";
 import {toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';

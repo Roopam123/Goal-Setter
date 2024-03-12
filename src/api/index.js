@@ -2,7 +2,7 @@ import {TOKEN_KEY,REFRESH_KEY,API_URLS,setItemInLocalStorage,getItemFromLocalSto
 
 
 
-const checkTokenValidity = async(token)=>{
+const checkTokenValidity = async (token)=>{
     let apiUrl = API_URLS.checkTokenValidity();
 
     const headers = {
@@ -26,8 +26,7 @@ const checkTokenValidity = async(token)=>{
 
         return true;
     }catch(err){
-        return false;
-        
+        return false;  
     }
 }
 
@@ -55,7 +54,8 @@ const getAccessToken = async(refress_token)=>{
 
         return data;
 
-    }catch(err){
+    }
+    catch(err){
         return {
             message: err.message,
             success: false
