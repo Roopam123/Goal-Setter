@@ -21,17 +21,25 @@ const useProvideAuth = ()=>{
     }, []);
 
     const login = async(username, password)=>{
-
-        let response = await userLogin(username, password);
+        const body = {username, password};
+        let response = await userLogin(body);
         if(response.success){
             setItemInLocalStorage(TOKEN_KEY, response.data.access_token);
             setItemInLocalStorage(REFRESH_KEY, response.data.refresh_token);
             let user = await me();
-            user = user.data;
-            setUser(user);
-            return {
-                success: true,
+            if(user.success){
+                setUser(user.data);
+                return {
+                    success: true,
+                }
+            }else{
+                return {
+                    success: false,
+                    message: response.message
+                }
             }
+            
+            
         }else{
             return {
                 success: false,

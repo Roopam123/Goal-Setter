@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import "./SignUp.css";
-import Button from '../../components/Button/Button';
-import img from '../../Assets/goal.png';
-import { register, checkUsername } from '../../api';
+import styles from "../styles/signup.module.css";
+import img from '../assets/goal.png';
+import { register, checkUsername } from '../api';
 import {toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
@@ -17,6 +16,7 @@ const Signup = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [address, setAddress] = useState("");
   const [usernameExists, setUsernameExists] = useState(false);
+  const [btnLoading, setBtnLoading] = useState(false);
   const navigate = useNavigate();
   
   useEffect(()=>{
@@ -27,7 +27,7 @@ const Signup = () => {
 
 
   const handelOnSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
         // check for all required feilds
         if(firstName === "" || lastName === "" || mobileNo === "" || username === "" || qualification === "" || password == "" || confirmPassword == ""){
@@ -40,6 +40,7 @@ const Signup = () => {
       toast.error("password and cpassword are not same!")
       return;
     }
+    setBtnLoading(true);
 
     const data = {
       fName: firstName,
@@ -66,12 +67,14 @@ const Signup = () => {
           setPassword("");
           setConfirmPassword("");
 
-          navigate("/");
+          navigate("/signin");
+          setBtnLoading(false);
           return;
          
 
        }else{
          toast.warn(response.message);
+         setBtnLoading(false);
          return;
        }
     } catch (err) {
@@ -84,6 +87,7 @@ const Signup = () => {
       setQualification("");
       setPassword("");
       setConfirmPassword("");
+      setBtnLoading(false);
       return;
     }
   }
@@ -102,23 +106,23 @@ const Signup = () => {
   }
 
   return (
-    <div className='signup'>
+    <div className={styles.signup}>
       {/* Left */}
-      <div className="singup-left">
+      <div className={styles.singup_left}>
         <img src={img} alt="" />
       </div>
       {/* Right */}
-      <div className="signup-right">
+      <div className={styles.signup_right}>
         <form>
-          <div className="form-item">
-            <div className="form-content">
+          <div className={styles.form_item}>
+            <div className={styles.form_content}>
               <span>First Name*</span>
               <input type="text" 
                      placeholder='Enter your first name' 
                      value={firstName}
                      onChange={(e) => setFirstName(e.target.value)} />
             </div>
-            <div className="form-content">
+            <div className={styles.form_content}>
               <span>Last Name*</span>
               <input type="text" 
                      placeholder='Enter your last name' 
@@ -126,15 +130,15 @@ const Signup = () => {
                      onChange={(e)=> setLastName(e.target.value)} />
             </div>
           </div>
-          <div className="form-item">
-            <div className="form-content">
+          <div className={styles.form_item}>
+            <div className={styles.form_content}>
               <span>Mobile No.*</span>
               <input type="text" 
                      placeholder='Enter your Mobile No.' 
                      value={mobileNo}
                      onChange={(e) => setMobileNo(e.target.value)} />
             </div>
-            <div className="form-content">
+            <div className={styles.form_content}>
               <span>Qualification*</span>
               <input type="text" 
                      placeholder='First Name'
@@ -142,17 +146,17 @@ const Signup = () => {
                      onChange={(e) => setQualification(e.target.value)} />
             </div>
           </div>
-          <div className="form-item">
-            <div className="form-content">
+          <div className={styles.form_item}>
+            <div className={styles.form_content}>
               <span>Username*</span>
               <input type="text"
                      placeholder='Enter your username'
                      value={username}
                      onChange={(e)=> setUsername(e.target.value)}
                      />
-                {usernameExists && <small className='small_error'>username taken</small>}
+                {usernameExists && <small className={styles.small_error}>username taken</small>}
             </div>
-            <div className="form-content">
+            <div className={styles.form_content}>
               <span>Password*</span>
               <input type="password" 
                      placeholder='Enter your password' 
@@ -160,8 +164,8 @@ const Signup = () => {
                      onChange={(e) => setPassword(e.target.value)} />
             </div>
           </div>
-          <div className="form-item">
-            <div className="form-content">
+          <div className={styles.form_item}>
+            <div className={styles.form_content}>
               <span>Confirm Password*</span>
               <input type="password"
                      placeholder='Confirm Password'
@@ -169,7 +173,7 @@ const Signup = () => {
                      onChange={(e) => setConfirmPassword(e.target.value)}
                      />
             </div>
-            <div className="form-content">
+            <div className={styles.form_content}>
               <span>Address</span>
               <input type="text" 
                      placeholder='Enter your Address' 
@@ -177,7 +181,22 @@ const Signup = () => {
                      onChange={(e) => setAddress(e.target.value)} />
             </div>
           </div>
-          <span onClick={handelOnSubmit} className='button'><Button title="Sign Up"/></span>
+
+          {btnLoading ? 
+            <button disabled className={styles.btn_disabled}>
+            Signing Up...
+          </button>
+         :
+          <button onClick={handelOnSubmit} className={styles.btn}>
+            Sign Up
+          </button>
+          
+          }
+
+         
+
+         
+
         </form>
       </div>
     </div>

@@ -1,7 +1,7 @@
 export * from "./constants";
 
 export const setItemInLocalStorage = (key, value)=>{
-    if(!key || !value){
+    if(!key|| !value){
         return console.error("cannot store in LS");
     }
 
@@ -25,3 +25,7 @@ export const removeItemFromLocalStorage = (key)=>{
 
     return localStorage.removeItem(key);
 }
+
+const TOKEN_KEY = "__token_access_name__"
+const REFRESH_KEY = "__refresh_access_name__"
+export {TOKEN_KEY, REFRESH_KEY};
