@@ -4,6 +4,7 @@ import Signup from "./screens/SignUp";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import SignIn from "./screens/SignIn";
+import Goal from "./screens/Goals";
 import "./index.css";
 import Home from '../src/screens/Home';
 import { useAuth } from "./hooks";
@@ -21,7 +22,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/signin" element={< SignIn/>} />
+        <Route path="/signin" element={<SignIn/>} />
+        <Route path="/goal" element={<Goal/>} />
       </Routes>
       <Footer />
     </BrowserRouter>

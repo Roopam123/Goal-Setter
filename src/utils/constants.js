@@ -7,4 +7,8 @@ export const API_URLS = {
     checkTokenValidity: ()=> `${API_ROOT}api/v1/student/checkTokenValidity`,
     getAccessTokenUrl: ()=> `${API_ROOT}api/v1/student/getAccessToken`,
     checkUsername: (username)=> `${API_ROOT}api/v1/student/checkUsername?username=${username}`,
+    getGoalsOfUser: ()=> `${API_ROOT}api/v1/goal/getGoalsOfUser`,
+    createGoal: ()=> `${API_ROOT}api/v1/goal/createGoal`,
+    deleteGoal: (goal_id)=> `${API_ROOT}api/v1/goal/deleteGoal?id=${goal_id}`,
+    updateGoal: ()=> `${API_ROOT}api/v1/goal/updateGoal`
 }

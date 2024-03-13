@@ -11,4 +11,4 @@ const NewHome = () => {
   )
 }
 
-export default NewHome
+export default NewHome;

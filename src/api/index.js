@@ -214,3 +214,28 @@ export const checkUsername = (username)=>{
         method: "GET"
     });
 }
+
+export const getGoalsOfUser = ()=>{
+    return customFetch(API_URLS.getGoalsOfUser(), {
+        method: "GET"
+    });
+}
+
+export const createGoal = (body)=>{
+    return customFetch(API_URLS.createGoal(), {
+        method: "POST",
+        body: body
+    });
+}
+
+export const deleteGoal = (goal_id)=>{
+    return customFetch(API_URLS.deleteGoal(goal_id), {
+        method: "DELETE"
+    })
+}
+export const editGoal = (body)=>{
+    return customFetch(API_URLS.deleteGoal(body), {
+        method: "DELETE",
+        body: body
+    });
+}
